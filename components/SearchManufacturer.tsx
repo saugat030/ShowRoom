@@ -14,15 +14,17 @@ const SearchManufacturer = ({
   const filteredManufacturers =
     query === ""
       ? manufacturers
-      : manufacturers.filter((item) =>
-          item
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
+      : manufacturers.filter(
+          (item) =>
+            item
+              .toLowerCase()
+              .replace(/\s+/g, "") //remove spaces from the query
+              .includes(query.toLowerCase().replace(/\s+/g, "")) //check if the item  includes the charatcer in th provided query.
         );
 
   return (
     <div className="search-manufacturer">
+      {/* SearchBar component ko vitra  ko setManufacturer changes in the onChange */}
       <Combobox value={manufacturer} onChange={setManuFacturer}>
         <div className="relative w-full">
           {/* Button for the combobox. Click on the icon to see the complete dropdown */}
@@ -40,7 +42,7 @@ const SearchManufacturer = ({
           <Combobox.Input
             className="search-manufacturer__input"
             displayValue={(item: string) => item}
-            onChange={(event) => setQuery(event.target.value)} // Update the search query when the input changes
+            onChange={(e) => setQuery(e.target.value)} // Update the 'query' when the input changes
             placeholder="Volkswagen..."
           />
 
@@ -57,6 +59,7 @@ const SearchManufacturer = ({
               static
             >
               {filteredManufacturers.length === 0 && query !== "" ? (
+                //if someon types a query that doesnot match any of the manufracturer
                 <Combobox.Option
                   value={query}
                   className="search-manufacturer__option"

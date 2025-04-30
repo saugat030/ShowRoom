@@ -26,11 +26,9 @@ const SearchBar = () => {
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (manufacturer.trim() === "" && model.trim() === "") {
       return alert("Please provide some input");
     }
-
     updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
   };
 
